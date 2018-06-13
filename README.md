@@ -13,9 +13,16 @@ przykład użycia ngIf i NgFor
           <p>Brak zadań</p>
         </ng-template>
 
-#################################################################
+########################################
+Dziedziczenie i naddziedziczenie
 
+  @Input()
+  tasks;
+<app-child [tasks]="tasksList"> //lista z komponentu podrzędnego i nadrzędnego
 
+</app-child>
+
+########################################
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
