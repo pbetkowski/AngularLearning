@@ -1,3 +1,24 @@
+Dziedziczenie:
+
+Klasa nadrzędna html:
+<app-child [tasks]="tasksList">
+
+klasa podrzędna:
+
+import { Component, OnInit, Input } from '@angular/core';  //zaimportować
+
+@Component({
+  selector: 'app-child',    
+  templateUrl: './child.component.html',
+  styleUrls: ['./child.component.css']
+})
+export class ChildComponent implements OnInit {
+
+  @Input()
+  tasks;  //pozwala wykorzystać element podrzędny w klasie nadrzędnej
+
+
+#########################################
 notatki:
 przykład użycia ngIf i NgFor
         <ng-container *ngIf="tasksList.length > 0 ; else noTask">
