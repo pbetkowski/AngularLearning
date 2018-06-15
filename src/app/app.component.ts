@@ -26,4 +26,9 @@ export class AppComponent {
     this.doneList.push(task);
     this.removeTask(task);
   }
+
+
+  selected(task: string): void {
+    console.log(task);
+  }
 }

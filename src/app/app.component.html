@@ -35,6 +35,6 @@
 
 
 </div>
-<app-child [tasks]="tasksList">
+<app-child [tasks]="tasksList" (eventTask)="selected($event)">
 
 </app-child>
