@@ -1,40 +1,10 @@
-<div>
-
-  <div class="container">
-    <div>
-      <input [(ngModel)]="newTask">
-      <button (click)="add()" class="btn btn-sm btn-primary">Dodaj</button>
-    </div>
+ <div class="container">
+    <app-add-task (emitTask)="add($event)"></app-add-task>
   </div>
 
   <div class="container">
-      <div>
-        <ng-container *ngIf="tasksList.length > 0 ; else noTask">
-            <ul>
-                <li *ngFor="let task of tasksList">
-                    {{task}}
-                    <button  (click)="completeTask(task)" class="btn btn-sm btn-success">Zrobione</button>
-                    <button (click)="removeTask(task)" class="btn btn-sm btn-danger">Usuń</button>
-                </li>
-              </ul>
-        </ng-container>
-        <ng-template #noTask>
-          <p>Brak zadań</p>
-        </ng-template>
-      </div>
-      <div>
-        <p>Wykonane zadanie: {{doneList.length}}</p>
-         <ul>
-            <li *ngFor="let task of doneList">
-                {{task}}
-            </li>>
-         </ul>
-        </div>
+    <app-todo-task [tasksList]="tasksList" (emitDone)="completeTask($event)" (emitRemove)="removeTask($event)"></app-todo-task>
+    <div>
+      <app-tone-task [doneList]="doneList"></app-tone-task>
     </div>
-
-
-
-</div>
-<app-child [tasks]="tasksList" (eventTask)="selected($event)">
-
-</app-child>
+  </div>

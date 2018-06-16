@@ -1,3 +1,38 @@
+﻿
+####
+
+Wysyłanie widoku do childa --->>ngContent  ( w childzie html)
+
+#####
+Komponent podrzędny ---> nadrzędny
+
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+
+
+@Component({
+  selector: 'app-child',
+  templateUrl: './child.component.html',
+  styleUrls: ['./child.component.css']
+})
+export class ChildComponent implements OnInit {
+Dziecko--->>>rodzic
+################
+  @Input()
+  tasks;
+
+  @Output()
+  eventTask = new EventEmitter<string>();
+
+html nadrzędny
+
+<app-child [tasks]="tasksList" (eventTask)="selected($event)">
+
+.ts nadrzędny
+
+  selected(task: string): void {
+    console.log(task);
+  }
+
 <<<<<<< HEAD
 ﻿Dziedziczenie:
 =======

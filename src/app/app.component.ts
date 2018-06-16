@@ -1,21 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
+
   title = 'app';
 
-  newTask: string;
   tasksList: Array<string> = [];
   doneList: Array<string> = [];
 
-  add() {
-    this.tasksList.push(this.newTask);
-    this.newTask = '';
-    console.log(this.tasksList);
+  ngOnInit(): void {
+    this.tasksList = ['Angular', 'Asp.Net.Core', 'Java', 'Android'];
+  }
+
+  add(task: string) {
+    this.tasksList.push(task);
   }
 
   removeTask(task: string) {
