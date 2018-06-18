@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { TaskService } from '../services/task.service';
 
 @Component({
   selector: 'app-tone-task',
@@ -7,10 +8,13 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ToneTaskComponent implements OnInit {
 
-  @Input()
   doneList: Array<string> = [];
 
-  constructor() { }
+  constructor(private taskService: TaskService) {
+    this.taskService.getDoneObs().subscribe((m: Array<string>) => {
+      this.doneList = m;   // wstrzykujemy dane z serwisu
+    });
+   }
 
   ngOnInit() {
   }

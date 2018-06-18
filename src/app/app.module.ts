@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { AddTaskComponent } from './add-task/add-task.component';
 import { TodoTaskComponent } from './todo-task/todo-task.component';
 import { ToneTaskComponent } from './tone-task/tone-task.component';
+import { TaskService } from './services/task.service';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,7 @@ import { ToneTaskComponent } from './tone-task/tone-task.component';
     BrowserModule,
     FormsModule
   ],
-  providers: [],
+  providers: [TaskService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
