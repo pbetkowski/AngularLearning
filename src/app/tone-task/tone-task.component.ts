@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { TaskService } from '../services/task.service';
+import { Task } from '../model/task';
 
 @Component({
   selector: 'app-tone-task',
@@ -8,10 +9,10 @@ import { TaskService } from '../services/task.service';
 })
 export class ToneTaskComponent implements OnInit {
 
-  doneList: Array<string> = [];
+  doneList: Array<Task> = [];
 
   constructor(private taskService: TaskService) {
-    this.taskService.getDoneObs().subscribe((m: Array<string>) => {
+    this.taskService.getDoneObs().subscribe((m: Array<Task>) => {
       this.doneList = m;   // wstrzykujemy dane z serwisu
     });
    }

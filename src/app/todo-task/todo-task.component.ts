@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TaskService } from '../services/task.service';
+import { Task } from '../model/task';
 
 @Component({
   selector: 'app-todo-task',
@@ -8,11 +9,11 @@ import { TaskService } from '../services/task.service';
 })
 export class TodoTaskComponent implements OnInit {
 
-  tasksList = [];
+  tasksList: Array<Task> = [];  // pozwala odniesc sie do pol klasy task
 
 
   constructor(private taskService: TaskService) {
-    this.taskService.getTaskObs().subscribe((m: Array<string>) => {
+    this.taskService.getTaskObs().subscribe((m: Array<Task>) => {
       this.tasksList = m;  // to co do nas przyszło z serwisu dopisujemy do listy
     });
    }
@@ -20,11 +21,11 @@ export class TodoTaskComponent implements OnInit {
   ngOnInit() {
   }
 
-  removeTask(task: string) {
+  removeTask(task: Task) {
     this.taskService.removeTask(task);
   }
 
-  completeTask(task: string) {
+  completeTask(task: Task) {
     this.taskService.completeTask(task);
   }
 
