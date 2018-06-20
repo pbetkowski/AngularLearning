@@ -1,6 +1,6 @@
 <p>Wykonane zadanie: {{doneList.length}}</p>
 <ul>
-   <li appCheck *ngFor="let task of doneList">
-       {{task.name}}
+   <li appCheck appDate  [date]="task.end" *ngFor="let task of doneList">
+       {{task.name | transformTask: '-zakończono!'}}
    </li>>
 </ul>

@@ -18,8 +18,10 @@ export class TaskService {
     [{name: 'Angular', created: new Date()},
     {name: 'Asp.Net.Core', created: new Date()},
     {name: 'Java', created: new Date()},
-    {name: 'Android', created: new Date()}];
-    this.tasksListObservable.next(this.tasksList);
+    {name: 'Android', created: new Date()},
+    {name: 'Bębny', created: new Date()},
+    {name: 'C#', created: new Date()}];
+    this.tasksListObservable.next(this.tasksList.slice());  // konieczne do sortowania przy pure pipe
   }
 
   add(task: Task) {
