@@ -6,13 +6,15 @@ import { AddTaskComponent } from './add-task/add-task.component';
 import { TodoTaskComponent } from './todo-task/todo-task.component';
 import { ToneTaskComponent } from './tone-task/tone-task.component';
 import { TaskService } from './services/task.service';
+import { CheckDirective } from './shared/check.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     AddTaskComponent,
     TodoTaskComponent,
-    ToneTaskComponent
+    ToneTaskComponent,
+    CheckDirective
   ],
   imports: [
     BrowserModule,
