@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Task } from '../model/task';
+import { HttpService } from './http.service';
 
 @Injectable() // przeniesiona funkcjonalnosc z appcomponent
 export class TaskService {
@@ -10,16 +11,12 @@ export class TaskService {
   private tasksListObservable = new BehaviorSubject<Array<Task>>([]);
 
 
-  constructor() {
-    const tasksList =
-    [{name: 'Angular', created: new Date().toLocaleString(), isDone: false},
-    {name: 'Asp.Net.Core', created: new Date().toLocaleString(), isDone: false},
-    {name: 'Java', created: new Date().toLocaleString(), isDone: false},
-    {name: 'Android', created: new Date().toLocaleString(), isDone: false},
-    {name: '.Net', created: new Date().toLocaleString(), end: new Date().toLocaleString(), isDone: true},
-    {name: 'Bębny', created: new Date().toLocaleString(), isDone: false},
-    {name: 'C#', created: new Date().toLocaleString(), isDone: false}];
-    this.tasksListObservable.next(tasksList.slice());  // konieczne do sortowania przy pure pipe
+  constructor(private service: HttpService) {
+    this.service.getTasks().subscribe(m => {
+      this.tasksListObservable.next(m);
+    });
+    // const tasksList = [];
+    // this.tasksListObservable.next(tasksList.slice());  // konieczne do sortowania przy pure pipe
   }
 
   add(task: Task) {
@@ -48,6 +45,10 @@ export class TaskService {
 
   getTaskObs(): Observable<Array<Task>> {
     return this.tasksListObservable.asObservable();
+  }
+
+  saveTaskInDb() {
+    this.service.saveTask(this.tasksListObservable.getValue());
   }
 
 }
