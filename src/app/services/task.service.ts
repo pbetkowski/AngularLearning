@@ -5,39 +5,40 @@ import { Task } from '../model/task';
 @Injectable() // przeniesiona funkcjonalnosc z appcomponent
 export class TaskService {
 
-  private tasksList: Array<Task> = [];
-  private doneList: Array<Task> = [];
-
   // wypychanie list do komponentow
   // serwis inicjalizuje się szybciej niż komponent
   private tasksListObservable = new BehaviorSubject<Array<Task>>([]);
-  private doneListObservable = new BehaviorSubject<Array<Task>>([]);  // niepotrzebna inicjalizacja
+
 
   constructor() {
-    this.tasksList =
-    [{name: 'Angular', created: new Date()},
-    {name: 'Asp.Net.Core', created: new Date()},
-    {name: 'Java', created: new Date()},
-    {name: 'Android', created: new Date()},
-    {name: 'Bębny', created: new Date()},
-    {name: 'C#', created: new Date()}];
-    this.tasksListObservable.next(this.tasksList.slice());  // konieczne do sortowania przy pure pipe
+    const tasksList =
+    [{name: 'Angular', created: new Date().toLocaleString(), isDone: false},
+    {name: 'Asp.Net.Core', created: new Date().toLocaleString(), isDone: false},
+    {name: 'Java', created: new Date().toLocaleString(), isDone: false},
+    {name: 'Android', created: new Date().toLocaleString(), isDone: false},
+    {name: '.Net', created: new Date().toLocaleString(), end: new Date().toLocaleString(), isDone: true},
+    {name: 'Bębny', created: new Date().toLocaleString(), isDone: false},
+    {name: 'C#', created: new Date().toLocaleString(), isDone: false}];
+    this.tasksListObservable.next(tasksList.slice());  // konieczne do sortowania przy pure pipe
   }
 
   add(task: Task) {
-    this.tasksList.push(task);
-    this.tasksListObservable.next(this.tasksList); // emitujemy listę do innych subskrybentów
+    const list = this.tasksListObservable.getValue();
+    list.push(task);
+    this.tasksListObservable.next(list); // emitujemy listę do innych subskrybentów
   }
 
   removeTask(task: Task) {
-    this.tasksList = this.tasksList.filter(e => e !== task);
-    this.tasksListObservable.next(this.tasksList);
+    const list = this.tasksListObservable.getValue().filter(e => e !== task);
+    this.tasksListObservable.next(list);
   }
 
   completeTask(task: Task) {
-    this.doneList.push(task);
-    this.removeTask(task);
-    this.doneListObservable.next(this.doneList);
+    task.end = new Date().toLocaleString();
+    task.isDone = true;
+    const list = this.tasksListObservable.getValue();
+    // nowe elementy w subjectach
+    this.tasksListObservable.next(list);
   }
 
 
@@ -49,7 +50,4 @@ export class TaskService {
     return this.tasksListObservable.asObservable();
   }
 
-  getDoneObs(): Observable<Array<Task>> {
-    return this.doneListObservable.asObservable();
-  }
 }

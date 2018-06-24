@@ -10,6 +10,7 @@ import { CheckDirective } from './shared/check.directive';
 import { DateDirective } from './shared/date.directive';
 import { TransformTaskPipe } from './shared/transform-task.pipe';
 import { SortByNamePipe } from './shared/sort-by-name.pipe';
+import { HttpService } from './services/http.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { SortByNamePipe } from './shared/sort-by-name.pipe';
     BrowserModule,
     FormsModule
   ],
-  providers: [TaskService],
+  providers: [TaskService, HttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

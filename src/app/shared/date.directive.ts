@@ -6,7 +6,7 @@ import { Directive, HostListener, Input, Renderer2, ElementRef } from '@angular/
 export class DateDirective {
 
   @Input() // umozliwia wstrzykniecie tutaj daty z innego obiektu
-  private date: Date; // przesylamy date z obiektu task z htmla
+  private date: string; // przesylamy date z obiektu task z htmla
   private paragraph; // pole html
 
   constructor(private el: ElementRef, private renderer: Renderer2) {
@@ -15,7 +15,7 @@ export class DateDirective {
 
   @HostListener('mouseenter')   // faktyczna nazwa eventu
   mouseOn(eventDate: Event) {
-    this.paragraph.innerHTML = this.date.toDateString();
+    this.paragraph.innerHTML = this.date;
     this.renderer.appendChild(this.el.nativeElement, this.paragraph);  // rodzic, dziecko
   }
 

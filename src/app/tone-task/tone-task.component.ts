@@ -12,8 +12,8 @@ export class ToneTaskComponent implements OnInit {
   doneList: Array<Task> = [];
 
   constructor(private taskService: TaskService) {
-    this.taskService.getDoneObs().subscribe((m: Array<Task>) => {
-      this.doneList = m;   // wstrzykujemy dane z serwisu
+    this.taskService.getTaskObs().subscribe((m: Array<Task>) => {
+      this.doneList = m.filter(t => t.isDone === true);   // wstrzykujemy dane z serwisu
     });
    }
 

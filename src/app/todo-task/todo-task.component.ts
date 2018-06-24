@@ -14,7 +14,7 @@ export class TodoTaskComponent implements OnInit {
 
   constructor(private taskService: TaskService) {
     this.taskService.getTaskObs().subscribe((m: Array<Task>) => {
-      this.tasksList = m;  // to co do nas przyszło z serwisu dopisujemy do listy
+      this.tasksList = m.filter(t => t.isDone === false);  // to co do nas przyszło z serwisu dopisujemy do listy
     });
    }
 
@@ -26,7 +26,6 @@ export class TodoTaskComponent implements OnInit {
   }
 
   completeTask(task: Task) {
-    task.end = new Date();
     this.taskService.completeTask(task);
   }
 
